@@ -1,0 +1,132 @@
+<script>
+    var flights = {
+
+
+        'CS1': { flightname: 'Indigo A11', no: '89', stp: 'Gwalior', ep: 'Delhi', fare: '2589', days: 'Monday,Wednesday,Friday,Sunday', logo: 'indigo.png', departure: '08:30', arrival: '10:15' },
+        'CS2': { flightname: 'Air India B22', no: '102', stp: 'Delhi', ep: 'Mumbai', fare: '3299', days: 'Tuesday,Thursday,Saturday', logo: 'airindia.png', departure: '09:45', arrival: '12:10' },
+        'CS3': { flightname: 'SpiceJet C33', no: '145', stp: 'Lucknow', ep: 'Bangalore', fare: '4120', days: 'Monday,Thursday,Saturday', logo: 'spicejet.png', departure: '11:00', arrival: '14:30' },
+        'CS4': { flightname: 'Vistara D44', no: '178', stp: 'Chennai', ep: 'Kolkata', fare: '3890', days: 'Wednesday,Friday,Sunday', logo: 'vistara.png', departure: '13:15', arrival: '15:40' },
+        'CS5': { flightname: 'GoAir E55', no: '201', stp: 'Pune', ep: 'Hyderabad', fare: '2745', days: 'Tuesday,Friday,Sunday', logo: 'Goair.png', departure: '14:20', arrival: '15:35' },
+        'CS6': { flightname: 'Indigo F66', no: '236', stp: 'Jaipur', ep: 'Ahmedabad', fare: '2599', days: 'Monday,Thursday', logo: 'indigo.png', departure: '15:00', arrival: '16:20' },
+        'CS7': { flightname: 'Air Asia G77', no: '289', stp: 'Delhi', ep: 'Goa', fare: '4500', days: 'Wednesday,Saturday', logo: 'airasia.png', departure: '16:30', arrival: '19:00' },
+        'CS8': { flightname: 'SpiceJet H88', no: '315', stp: 'Bhopal', ep: 'Indore', fare: '1999', days: 'Friday,Sunday', logo: 'spicejet.png', departure: '17:10', arrival: '17:55' },
+        'CS9': { flightname: 'Vistara I99', no: '347', stp: 'Chandigarh', ep: 'Bangalore', fare: '5230', days: 'Tuesday,Thursday,Saturday', logo: 'vistara.png', departure: '18:45', arrival: '21:50' },
+        'CS10': { flightname: 'Air India J10', no: '402', stp: 'Patna', ep: 'Delhi', fare: '3100', days: 'Monday,Wednesday,Friday', logo: 'airindia.png', departure: '20:00', arrival: '21:40' }
+    };
+
+
+    function show() {
+        info(flights)
+    }
+    function fromSearch() {
+        // info(data)
+        var V = Object.values(flights)
+        var data = V.filter((item, i) => {
+            return (
+                (from.value === "" || item.stp.toLowerCase().startsWith(from.value.toLowerCase())) &&
+                (to.value === "" || item.ep.toLowerCase().startsWith(to.value.toLowerCase())) &&
+                (d.value === "" || item.days.toLowerCase().includes(d.value.toLowerCase())) &&
+                (fname.value === "" || item.flightname === fname.value))
+        })
+
+
+
+        info(data)
+    }
+
+
+
+
+
+    function info(data) {
+
+        var K = Object.keys(data)
+        var V = Object.values(data)
+        var htm = `<table border='1' cellspacing='0' height='50%' width='95%'>`
+        htm += `<caption><h1> Flights Information </h1></caption>`
+        htm += `<tr bgcolor="lightyellow" align='center'><td><b>SN</b></td>
+            <td><b>Picture</b></td>
+            <td><b>Flight Id</b></td>
+            <td><b>Flight Name</b></td>
+            <td><b>No. of Seats</b></td>
+            <td><b>From</b></td>
+            <td><b>Arrival Time</b></td>
+            <td><b>To</b></td>
+            <td><b>Departue Time</b></td>
+            <td><b>Fare</b></td>
+            <td><b>Days</b></td></tr>`
+        V.map(function (item, i) {
+            htm += `<tr><td>${i + 1}</td>
+                <td><img src='${item.logo}' width='70%'  /></td>
+                <td>${K[i]}</td>
+                <td>${item.flightname}</td>
+                <td align='center'> ${item.no}</td>
+                <td class='fr' >${item.stp}</td>
+                <td>${item.arrival}</td>
+                <td>${item.ep}</td>
+                <td>${item.departure}</td>
+                <td width='10%' align='right'> &#8377; ${item.fare}</td>
+                <td>${item.days}</td>
+                </tr>
+                `
+        })
+        htm += `</table>`
+        result.innerHTML = htm
+
+    }
+</script>
+<html>
+<center>
+
+    <!-- <table border="1" bgcolor="" width="100%" > -->
+    <!-- <tr> -->
+    <!-- <td> -->
+
+    <h1>Sawai Man Singh International Airport</h1>
+    <h2>Sanganer, Jaipur – 302029</h2>
+    <h3>Rajasthan, India</h3>
+    <h4>Phone: +91-141-1234567</h4>
+    <!-- </td> -->
+
+
+    <!-- </tr> -->
+    <!-- </table> -->
+</center>
+
+<body onload="show()">
+
+    <hr>
+    <input type="text" id="from" placeholder="From City...">
+    <input type="text" id="to" placeholder="To city...">
+    <!-- <input type="text"  id="d"  placeholder="days...."><br><br> -->
+    <select id="d">
+        <option value="">--select days--</option>
+        <option value="monday">Monday</option>
+        <option value="tuesday">Tuesday</option>
+        <option value="wednesday">Wednesday</option>
+        <option value="thursday">Thursday</option>
+        <option value="friday">Friday</option>
+        <option value="saturday">Saturday</option>
+        <option value="sunday">Sunday</option>
+    </select>
+    <select id="fname">
+        <option value="">-- Select Flight --</option>
+        <option value="Indigo A11">Indigo A11</option>
+        <option value="Air India B22">Air India B22</option>
+        <option value="SpiceJet C33">SpiceJet C33</option>
+        <option value="Vistara D44">Vistara D44</option>
+        <option value="GoAir E55">GoAir E55</option>
+        <option value="Indigo F66">Indigo F66</option>
+        <option value="Air Asia G77">Air Asia G77</option>
+        <option value="SpiceJet H88">SpiceJet H88</option>
+        <option value="Vistara I99">Vistara I99</option>
+        <option value="Air India J10">Air India J10</option>
+    </select><br><br>
+
+
+    <input type="button" onclick="fromSearch()" value="search">
+    <div id="result"></div>
+
+</body>
+
+</html>
